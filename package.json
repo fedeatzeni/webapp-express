@@ -1,0 +1,26 @@
+{
+  "name": "webapp-express",
+  "version": "1.0.0",
+  "description": "webapp",
+  "homepage": "https://github.com/fedeatzeni/webapp-express#readme",
+  "bugs": {
+    "url": "https://github.com/fedeatzeni/webapp-express/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fedeatzeni/webapp-express.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "watch": "node --watch app.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "mysql2": "^3.13.0"
+  }
+}
