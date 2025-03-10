@@ -8,6 +8,13 @@ const moviesRouter = require("./routers/movies")
 //middlewares
 const errorsHandler = require("./middlewares/errorsHandler")
 const notFound = require("./middlewares/notFound")
+const imagePath = require("./middlewares/imagePath")
+
+// static files
+app.use(express.static("public"));
+
+// imgs path
+app.use(imagePath);
 
 // home route
 app.get("/api", (req, res)=> {
