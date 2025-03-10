@@ -12,6 +12,29 @@ function index(req, res) {
 }
 
 function show(req, res) {
+    const { id } = req.params;
+
+    // query
+    const detailMovie = "SELECT * FROM movies WHERE movies.id = ?"
+
+    connection.query(detailMovie, [id], (err, movieResult) => {
+        if (err) return res.status(500).json({ error: 'Database query failed' });
+        if (movieResult.length === 0) return res.status(404).json({ error: "Film non trovato" });
+
+        // res.json(movieResult[0]);
+        const movie = movieResult[0];
+
+        // query
+        const reviewsSql = "SELECT * FROM reviews WHERE movie_id = ?";
+
+        connection.query(reviewsSql, [id], (err, reviewsResult) => {
+            if (err) return res.status(500).json({ error: 'Database query failed' });
+            movie.reviews = reviewsResult
+
+            // result
+            res.json(movie);
+        })
+    })
 
 }
 
