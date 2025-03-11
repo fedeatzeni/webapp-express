@@ -13,7 +13,7 @@ function index(req, res) {
         const movies = result.map(movie => {
             return {
                 ...movie,
-                image: req.imagePath + movie.title+".jpg"
+                image: req.imagePath + movie.image
             }
         })
 
@@ -40,6 +40,8 @@ function show(req, res) {
         connection.query(reviewsSql, [id], (err, reviewsResult) => {
             if (err) return res.status(500).json({ error: 'Database query failed' });
             movie.reviews = reviewsResult
+
+            movie.image = req.imagePath + movie.image
 
             // result
             res.json(movie);
