@@ -2,6 +2,9 @@ const express = require("express")
 const app = express()
 const port = process.env.PORT
 
+//cors
+const cors = require("cors")
+
 //router 
 const moviesRouter = require("./routers/movies")
 
@@ -13,11 +16,13 @@ const imagePath = require("./middlewares/imagePath")
 // static files
 app.use(express.static("public"));
 
+app.use(cors({ origin: process.env.FE_APP }))
+
 // imgs path
 app.use(imagePath);
 
 // home route
-app.get("/api", (req, res)=> {
+app.get("/api", (req, res) => {
     res.send("Rotta home dei film")
 })
 
