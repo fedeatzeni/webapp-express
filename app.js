@@ -16,7 +16,11 @@ const imagePath = require("./middlewares/imagePath")
 // static files
 app.use(express.static("public"));
 
+//cors
 app.use(cors({ origin: process.env.FE_APP }))
+
+//body-parser
+app.use(express.json())
 
 // imgs path
 app.use(imagePath);

@@ -50,4 +50,20 @@ function show(req, res) {
 
 }
 
-module.exports = { index, show };
+//store review
+function storeReview(req, res) {
+
+    const { id } = req.params;
+
+    const { text, name, vote } = req.body;
+
+    const insertReviewSql = "INSERT INTO reviews (text, name, vote, movie_id) VALUES (?, ?, ?, ?)"
+
+    connection.query(insertReviewSql, [text, name, vote, id], (err, result) => {
+        if (err) return res.status(500).json({ error: 'Database query failed' });
+        res.status(201)
+        res.json({ message: 'Review added', id: result.insertId })
+    })
+}
+
+module.exports = { index, show, storeReview };
