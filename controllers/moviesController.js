@@ -50,6 +50,26 @@ function show(req, res) {
 
 }
 
+function store(req, res, next) {
+
+    const { title, director, abstract } = req.body;
+
+    // nome del file creato dal middleware
+    const imageName = `${req.file.filename}`;
+
+    const query = "INSERT INTO movies (title, director, image, abstract) VALUES (?, ?, ?, ?)";
+
+    connection.query(query, [title, director, imageName, abstract], (err, result) => {
+        if (err) {
+            console.log(err)
+            return next(new Error("Errore interno del server"));
+        }
+
+        res.status(201).json({ status: "success", message: "movie Created" })
+    });
+
+}
+
 //store review
 function storeReview(req, res) {
 
@@ -66,4 +86,4 @@ function storeReview(req, res) {
     })
 }
 
-module.exports = { index, show, storeReview };
+module.exports = { index, show, store, storeReview };
